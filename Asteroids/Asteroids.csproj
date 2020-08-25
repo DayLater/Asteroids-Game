@@ -73,6 +73,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="Documentation\Game Class Diagram.pdf" />
+    <None Include="Documentation\Game Model Class Diagram.pdf" />
+    <None Include="Documentation\Game Sequence Diagram.pdf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
