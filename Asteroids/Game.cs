@@ -91,7 +91,7 @@ namespace AsteroidsGame
 
         private void CreateConfigureLabel()
         {
-            var text = "USE ARROWS TO TURN AND SPEED UP \n X - TO SHOOT \n Z - TO ACTIVATE LASER";
+            var text = "USE ARROWS TO TURN AND SPEED UP \n X - TO SHOOT \n Z - TO ACTIVATE LASER\nE - CHANGE VIEW\nPRESS SPACE TO START";
             var location = new Point(Width / 8, Height / 8);
             var size = new Size(Width / 4 * 3, Height / 4 * 3);
             CreateLabel(configureLabel, location, size, 
