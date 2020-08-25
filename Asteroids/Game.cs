@@ -24,7 +24,6 @@ namespace AsteroidsGame
         private readonly IView spriteView;
         private IView currentView;
 
-        private SoundPlayer soundPlayer;
         private State currentState;
 
         public Game(int width, int height)
@@ -38,7 +37,6 @@ namespace AsteroidsGame
             spriteView = new SpriteView(width, height);
             polygonView.SetSettings();
             spriteView.SetSettings();
-            soundPlayer = new SoundPlayer();
 
             timer.Tick += (sender, args) => TimerTick();
             game.GameOver += GameOver;
@@ -49,7 +47,6 @@ namespace AsteroidsGame
             CreateAllLabels();
             currentView = polygonView;
             currentState = State.Menu;
-            soundPlayer.PlayBackgroundMusic();
         }
 
         private void ConfigureWindow(int width, int height)
@@ -141,15 +138,11 @@ namespace AsteroidsGame
         private void ChangeScore()
         {
             if (currentState == State.Game)
-            {
-                soundPlayer.PlayEnemyDeath();
                 scoreLabel.Text = "Score: " + game.Score;
-            }
         }
 
         private void GameOver()
         {
-            soundPlayer.PlayPlayerDeath();
             timer.Stop();
             gameOverLabel.Visible = true;
             gameOverLabel.Text = "Game over\nYour Score: " + game.Score + "\nR to Restart";
@@ -185,10 +178,7 @@ namespace AsteroidsGame
             if (args.KeyData == Keys.Up)
                 isSpeedUp = false;
             if (args.KeyData == Keys.X && currentState == State.Game)
-            {
-                soundPlayer.PlayShoot();
                 game.MakeShoot();
-            }
         }
 
         private void ControlKeysOnStartMenu(Keys key)
@@ -220,10 +210,8 @@ namespace AsteroidsGame
             if (key == Keys.Up)
                 isSpeedUp = true;
             if (key == Keys.Z)
-            {
-                var isActive = game.Player.TryActivateLaser();
-                if (isActive)
-                    soundPlayer.PlayLaser();
+            { 
+                game.Player.TryActivateLaser();
             }
             if (key == Keys.E)
                 currentView = currentView == polygonView ? spriteView : polygonView;
