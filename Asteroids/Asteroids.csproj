@@ -90,6 +90,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Sprites\background.jpg" />
     <Content Include="Sprites\laser.png" />
     <Content Include="Sprites\Meteor.png" />
     <Content Include="Sprites\PlayerBullet.png" />

@@ -15,6 +15,7 @@ namespace AsteroidsGame.Views
         private Image ufoImage;
         private Image bulletImage;
         private Image laserImage;
+        private Image background;
 
         private int width;
         private int height;
@@ -74,6 +75,7 @@ namespace AsteroidsGame.Views
         public void DrawFrame(Graphics g, GameModel game)
         {
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.DrawImage(background, new Point(0 , 0));
             var matrix = g.Transform;
             DrawPlayer(g, game, matrix);
             DrawEnemies(g, game, matrix);
@@ -81,6 +83,7 @@ namespace AsteroidsGame.Views
 
         public void SetSettings()
         {
+            background = new Bitmap(Properties.Resources.background, width, height);
             playerImage = new Bitmap(Properties.Resources.PlayerShip, 30, 50);
             asteroidImage = new Bitmap(Properties.Resources.Meteor, 60, 60);
             smallAsteroidImage = new Bitmap(Properties.Resources.SmallMeteor, 30, 30);
