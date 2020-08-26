@@ -10,7 +10,7 @@ namespace AsteroidsGame
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Game(640, 480));
+            Application.Run(new Game(800, 600));
         }
     }
 }
