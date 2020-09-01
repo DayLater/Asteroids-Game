@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using AsteroidsEngine;
 using AsteroidsEngine.Entities;
 
@@ -6,10 +8,11 @@ namespace AsteroidsGame.Views
 {
     public static class DrawExtensions
     {
-        public static void DrawFigure(this PointF[] pointsToDraw, Graphics g, Pen pen)
+        public static void DrawFigure(this IEnumerable<PointF> pointsToDraw, Graphics g, Pen pen)
         {
-            g.DrawLines(pen, pointsToDraw);
-            g.DrawLine(pen, pointsToDraw[pointsToDraw.Length - 1], pointsToDraw[0]);
+            var points = pointsToDraw.ToArray();
+            g.DrawLines(pen, points);
+            g.DrawLine(pen, points[points.Length - 1], points[0]);
         }
 
         public static void Draw(this Ufo ufo, Graphics g)

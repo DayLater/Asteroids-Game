@@ -17,13 +17,27 @@ namespace AsteroidsGame.Views
         private Image laserImage;
         private Image background;
 
-        private int width;
-        private int height;
+        private readonly int width;
+        private readonly int height;
 
         public SpriteView(int width, int height)
         {
             this.width = width;
             this.height = height;
+
+            CreateAllSprites();
+        }
+
+        private void CreateAllSprites()
+        {
+            background = new Bitmap(Properties.Resources.background, width, height);
+            playerImage = new Bitmap(Properties.Resources.PlayerShip, 30, 50);
+            asteroidImage = new Bitmap(Properties.Resources.Meteor, 60, 60);
+            smallAsteroidImage = new Bitmap(Properties.Resources.SmallMeteor, 30, 30);
+            ufoImage = new Bitmap(Properties.Resources.ufo, 60, 40);
+            bulletImage = new Bitmap(Properties.Resources.PlayerBullet, 2, 10);
+            int maxLengthLaser = (int)Math.Sqrt(width * width + height * height);
+            laserImage = new Bitmap(Properties.Resources.laser, 3, maxLengthLaser);
         }
 
         private void DrawEnemies(Graphics g, GameModel game, Matrix matrix)
@@ -79,18 +93,6 @@ namespace AsteroidsGame.Views
             var matrix = g.Transform;
             DrawPlayer(g, game, matrix);
             DrawEnemies(g, game, matrix);
-        }
-
-        public void SetSettings()
-        {
-            background = new Bitmap(Properties.Resources.background, width, height);
-            playerImage = new Bitmap(Properties.Resources.PlayerShip, 30, 50);
-            asteroidImage = new Bitmap(Properties.Resources.Meteor, 60, 60);
-            smallAsteroidImage = new Bitmap(Properties.Resources.SmallMeteor, 30, 30);
-            ufoImage = new Bitmap(Properties.Resources.ufo, 60, 40);
-            bulletImage = new Bitmap(Properties.Resources.PlayerBullet, 2, 10);
-            int maxLengthLaser = (int)Math.Sqrt(width * width + height * height);
-            laserImage = new Bitmap(Properties.Resources.laser, 3, maxLengthLaser);
         }
     }
 }

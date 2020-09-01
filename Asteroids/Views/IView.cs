@@ -6,6 +6,5 @@ namespace AsteroidsGame.Views
     public interface IView
     {
         void DrawFrame(Graphics g, GameModel game);
-        void SetSettings();
     }
 }

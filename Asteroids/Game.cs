@@ -35,8 +35,6 @@ namespace AsteroidsGame
 
             polygonView = new PolygonView();
             spriteView = new SpriteView(width, height);
-            polygonView.SetSettings();
-            spriteView.SetSettings();
 
             timer.Tick += (sender, args) => TimerTick();
             game.GameOver += GameOver;

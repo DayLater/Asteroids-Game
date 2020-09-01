@@ -13,8 +13,6 @@ namespace AsteroidsGame.Views
             DrawEnemies(g, game);
         }
 
-        public void SetSettings() { }
-
         private void DrawEnemies(Graphics g, GameModel game)
         {
             foreach (var enemy in game.EnemySpawner)
