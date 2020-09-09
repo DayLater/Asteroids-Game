@@ -30,15 +30,13 @@ namespace AsteroidsGame.Views
             game.Player.GetCoordinates().DrawFigure(g, Pens.White);
 
             //draw laser
-            var laserPoints = game.Player.Laser.GetPoints();
-            if (laserPoints.Length != 0)
-                laserPoints
-                    .Select(v => v.ToPointF)
-                    .ToArray()
+            var laserPoints = game.Player.Laser.Vectors.ToList();
+            if (laserPoints.Count != 0)
+                laserPoints.Select(v => v.ToPointF)
                     .DrawFigure(g, Pens.CornflowerBlue);
 
             //Draw bullets
-            foreach (var bullet in game.Bullets)
+            foreach (var bullet in game.BulletsFolder)
                 bullet.GetCoordinates().DrawFigure(g, Pens.Red);
         }
     }

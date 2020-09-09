@@ -37,7 +37,7 @@ namespace AsteroidsGame
             spriteView = new SpriteView(width, height);
 
             timer.Tick += (sender, args) => TimerTick();
-            game.GameOver += GameOver;
+            GameModel.GameOver += GameOver;
             game.OnEnemyDeath += ChangeScore;
             KeyDown += KeysDown;
             KeyUp += UpKeys;
@@ -59,7 +59,7 @@ namespace AsteroidsGame
         private void Restart()
         {
             gameOverLabel.Visible = false;
-            game.StartGame();
+            game.Start();
             currentState = State.Game;
             timer.Start();
         }
@@ -117,12 +117,17 @@ namespace AsteroidsGame
 
         private void CreateReloadLabel()
         {
-            Laser.OnReady += () => reloadLabel.Text = "Ready!";
-            Laser.OnReload += timeToReload => reloadLabel.Text = "Reload: " + Math.Round(timeToReload) + "%";
+            Laser.OnReload += ChangeReloadText;
             CreateLabel(reloadLabel, new Point(Width - 120, 0), new Size(120, 20),
                 new Font(FontFamily.GenericMonospace, 10), "Reload", Color.Transparent);
             reloadLabel.ForeColor = Color.White;
             reloadLabel.Visible = true;
+        }
+
+        private void ChangeReloadText(double percents)
+        {
+            reloadLabel.Invoke(
+                new Action(() => reloadLabel.Text = percents < 99 ? $"Reload: {percents}%" : "Ready"));
         }
 
         private void CreateGameOverLabel()
@@ -195,6 +200,7 @@ namespace AsteroidsGame
             {
                 configureLabel.Visible = false;
                 currentState = State.Game;
+                game.Start();
                 timer.Start();
             }
         }
@@ -208,9 +214,7 @@ namespace AsteroidsGame
             if (key == Keys.Up)
                 isSpeedUp = true;
             if (key == Keys.Z)
-            { 
                 game.Player.TryActivateLaser();
-            }
             if (key == Keys.E)
                 currentView = currentView == polygonView ? spriteView : polygonView;
         }
@@ -237,7 +241,8 @@ namespace AsteroidsGame
             var g = Graphics.FromImage(image);
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.FillRectangle(Brushes.Black, ClientRectangle);
-            currentView.DrawFrame(g, game);
+            if (currentState == State.Game || currentState == State.GameOver)
+                currentView.DrawFrame(g, game);
             e.Graphics.DrawImage(image, (ClientRectangle.Width - image.Width) / 2,
                 (ClientRectangle.Height - image.Height) / 2);
         }

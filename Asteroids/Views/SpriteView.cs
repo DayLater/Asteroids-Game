@@ -61,7 +61,7 @@ namespace AsteroidsGame.Views
 
         private void DrawBullets(Graphics g, GameModel game, Matrix matrix)
         {
-            foreach (var bullet in game.Bullets)
+            foreach (var bullet in game.BulletsFolder)
                 DrawObject(g, bullet, bulletImage, matrix, -bullet.Angle);
         }
 
@@ -75,7 +75,7 @@ namespace AsteroidsGame.Views
         private void DrawLaser(Graphics g, GameModel game, Matrix matrix)
         {
             var laser = game.Player.Laser;
-            var firstPoint = laser.GetPoints().FirstOrDefault();
+            var firstPoint = laser.Vectors.FirstOrDefault();
             if (firstPoint != null)
             {
                 g.Transform = matrix;
