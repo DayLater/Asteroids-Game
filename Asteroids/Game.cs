@@ -38,6 +38,7 @@ namespace AsteroidsGame
 
             timer.Tick += (sender, args) => TimerTick();
             GameModel.GameOver += GameOver;
+            GameModel.GameStart += ChangeScore;
             game.OnEnemyDeath += ChangeScore;
             KeyDown += KeysDown;
             KeyUp += UpKeys;
@@ -138,11 +139,7 @@ namespace AsteroidsGame
 
         #endregion
 
-        private void ChangeScore()
-        {
-            if (currentState == State.Game)
-                scoreLabel.Text = "Score: " + game.Score;
-        }
+        private void ChangeScore() => scoreLabel.Text = $"Score: {game.Score}";
 
         private void GameOver()
         {

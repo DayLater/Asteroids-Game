@@ -15,17 +15,6 @@ namespace AsteroidsGame.Views
             g.DrawLine(pen, points[points.Length - 1], points[0]);
         }
 
-        public static void Draw(this Ufo ufo, Graphics g)
-        {
-            var centerToDraw = ufo.GetCenterToDraw();
-            var headToDraw = ufo.GetHeadToDraw();
-
-            g.DrawEllipse(Pens.DarkSeaGreen, headToDraw.X, headToDraw.Y,
-                ufo.Body.Ry * 2, ufo.Body.Ry * 2);
-
-            g.DrawEllipse(Pens.DeepSkyBlue, centerToDraw.X, centerToDraw.Y,
-                ufo.Body.Rx * 2, ufo.Body.Ry * 2);
-        }
 
         public static Vector GetCenterToDraw(this Ufo ufo)
         {
